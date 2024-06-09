@@ -1,0 +1,23 @@
+﻿using DataAccess.Models;
+using BusinessLogic.Dao;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BusinessLogic.Repository
+{
+    public class PassengerRepository : IPassengerRepository
+    {
+        public void delete(Passenger passenger)=>PassengerDAO.Instance.Remove(passenger);
+
+        public IEnumerable<Passenger> GetAll() => PassengerDAO.Instance.GetAllList();
+
+        public Passenger GetByID(int Id) => PassengerDAO.Instance.GetByID(Id);
+
+        public void insert(Passenger passenger) => PassengerDAO.Instance.Add(passenger);    
+
+        public void update(Passenger passenger) => PassengerDAO.Instance.Update(passenger);
+    }
+}
