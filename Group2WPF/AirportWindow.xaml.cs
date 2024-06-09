@@ -204,5 +204,10 @@ namespace Group2WPF
                 LoadList();
             }
         }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            (Application.Current as App)?.Logout();
+        }
     }
 }

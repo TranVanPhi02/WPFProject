@@ -136,5 +136,20 @@ namespace BusinessLogic.Dao
                 throw new Exception($"Error removing passenger: {ex.Message}");
             }
         }
+        //----------------------------------------
+        public IEnumerable<Passenger> SearchByName(string search)
+        {
+            List<Passenger> passengers;
+            try
+            {
+                var flightManagement = new FlightManagementDBContext();
+                passengers = flightManagement.Passengers.Where(x => x.FirstName.Contains(search)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return passengers;
+        }
     }
 }

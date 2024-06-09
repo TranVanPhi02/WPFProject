@@ -101,5 +101,10 @@ namespace Group2WPF
             BaggageWindow baggageWindow = new BaggageWindow(role);
             baggageWindow.ShowDialog();
         }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            (Application.Current as App)?.Logout();
+        }
     }
 }

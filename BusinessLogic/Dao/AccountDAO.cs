@@ -55,6 +55,50 @@ namespace BusinessLogic.Dao
             return result;
         }
 
+      
+
+        //-------------------------------------
+        public AccountMember GetAccountMemberByID(int accountId)
+        {
+            AccountMember acc = null;
+            try
+            {
+                FlightManagementDBContext flightManagement = new FlightManagementDBContext();
+                acc = flightManagement.AccountMembers.SingleOrDefault(a => a.Id == accountId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return acc;
+        }
+        //-------------------------------------
+        public void Register(AccountMember account)
+        {
+            try
+            {
+                FlightManagementDBContext flightManagement = new FlightManagementDBContext();
+
+                // Check if the acc already exists
+                AccountMember _account = GetAccountMemberByID(account.Id);
+
+                if (_account == null)
+                {
+                    // If member does not exist, add it to the context
+                    flightManagement.AccountMembers.Add(account);
+                    flightManagement.SaveChanges();
+                }
+                else
+                {
+                    // If member already exists, throw an exception
+                    throw new Exception("The account is already exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         //-0-----
         public string GetUserRole(AccountMember? account)
         {
@@ -69,7 +113,7 @@ namespace BusinessLogic.Dao
             }
             return userRole;
         }
-        //111
+        //111-----------------
         public AccountMember GetAccountByEmail(string email)
         {
             AccountMember account = null;

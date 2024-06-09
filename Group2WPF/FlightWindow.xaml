@@ -12,7 +12,7 @@
         <Style x:Key="NavButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="0 10 0 0"/>
             <Setter Property="Padding" Value="10"/>
-            <Setter Property="Background" Value="#E0E0E0"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="BorderBrush" Value="#CCCCCC"/>
@@ -51,15 +51,18 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="10">
-            <Button x:Name="btnOpenAirlineWindow" Content="Airline Window" Click="OpenAirlineWindow_Click" Style="{StaticResource NavButtonStyle}"/>
-            <Button x:Name="btnOpenAirportWindow" Content="Airport Window" Click="OpenAirportWindow_Click" Style="{StaticResource NavButtonStyle}"/>
-            <Button x:Name="btnOpenPassengerWindow" Content="Passenger Window" Click="OpenPassengerWindow_Click" Style="{StaticResource NavButtonStyle}"/>
-            <Button x:Name="btnOpenBookingWindow" Content="Booking Window" Click="OpenBookingWindow_Click" Style="{StaticResource NavButtonStyle}"/>
-            <Button x:Name="btnOpenBookingPlatformWindow" Content="Booking Platform Window" Click="OpenBookingPlatformWindow_Click" Style="{StaticResource NavButtonStyle}"/>
-            <Button x:Name="btnOpenFlightWindow" Content="Flight Window" Click="OpenFlightWindow_Click" Style="{StaticResource NavButtonStyle}"/>
-            <Button x:Name="btnOpenBaggageWindow" Content="Baggage Window" Click="OpenBaggageWindow_Click" Style="{StaticResource NavButtonStyle}"/>
-        </StackPanel>
+        <Border Grid.Row="1" Background="#623ED0" CornerRadius="0 50 0 30">
+            <StackPanel Grid.Column="0" Margin="10">
+                <Button x:Name="btnOpenAirlineWindow" Content="Airline Window" Click="OpenAirlineWindow_Click" Style="{StaticResource NavButtonStyle}"/>
+                <Button x:Name="btnOpenAirportWindow" Content="Airport Window" Click="OpenAirportWindow_Click" Style="{StaticResource NavButtonStyle}"/>
+                <Button x:Name="btnOpenPassengerWindow" Content="Passenger Window" Click="OpenPassengerWindow_Click" Style="{StaticResource NavButtonStyle}"/>
+                <Button x:Name="btnOpenBookingWindow" Content="Booking Window" Click="OpenBookingWindow_Click" Style="{StaticResource NavButtonStyle}"/>
+                <Button x:Name="btnOpenBookingPlatformWindow" Content="BookingPlatform Window" Click="OpenBookingPlatformWindow_Click" Style="{StaticResource NavButtonStyle}"/>
+                <Button x:Name="btnOpenFlightWindow" Content="Flight Window" Click="OpenFlightWindow_Click" Style="{StaticResource NavButtonStyle}"/>
+                <Button x:Name="btnOpenBaggageWindow" Content="Baggage Window" Click="OpenBaggageWindow_Click" Style="{StaticResource NavButtonStyle}"/>
+                <Button x:Name="btnLogout" Content="Logout" Click="Logout_Click" Style="{StaticResource NavButtonStyle}"/>
+            </StackPanel>
+        </Border>
 
         <!-- Center Column: DataGrid with Search Bar and Label -->
         <Grid Grid.Column="1" Margin="10">
@@ -75,7 +78,7 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" Margin="0 0 0 10">
                 <TextBox x:Name="txtSearch" Width="120" Style="{StaticResource SearchTextBoxStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalScrollBarVisibility="Disabled" Margin="0,0,10,0" />
-                <Button Content="Search" Click="SearchButton_Click" Style="{StaticResource NavButtonStyle}" Width="80" Margin="10 0 0 0" Height="30" FontSize="10" VerticalAlignment="Center" />
+                <Button Content="Search" Click="SearchButton_Click"  Width="80" Margin="10 0 0 0" Height="30" FontSize="13" VerticalAlignment="Center" />
             </StackPanel>
 
             <DataGrid x:Name="DataGridFlight" AutoGenerateColumns="False" Grid.Row="2" 

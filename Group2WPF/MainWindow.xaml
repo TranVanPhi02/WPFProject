@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Group2WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="500" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!-- Style for Buttons -->
         <Style TargetType="Button">
@@ -47,5 +47,6 @@
         <Button x:Name="btnOpenBookingPlatformWindow" Content="BookingPlatform Window" Click="OpenBookingPlatformWindow_Click"/>
         <Button x:Name="btnOpenFlightWindow" Content="Flight Window" Click="OpenFlightWindow_Click"/>
         <Button x:Name="btnOpenBaggageWindow" Content="Baggage Window" Click="OpenBaggageWindow_Click"/>
+        <Button x:Name="btnLogout" Content="Logout" Click="Logout_Click" Style="{StaticResource NavButtonStyle}"/>
     </StackPanel>
 </Window>

@@ -13,5 +13,19 @@ namespace Group2WPF
     /// </summary>
     public partial class App : Application
     {
+        public void Logout()
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            foreach (Window window in Current.Windows)
+            {
+                if (window is not LoginWindow)
+                {
+                    window.Close();
+                }
+            }
+
+          
+        }
     }
 }

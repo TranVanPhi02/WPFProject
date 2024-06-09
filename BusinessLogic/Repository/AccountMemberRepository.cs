@@ -32,5 +32,6 @@ namespace BusinessLogic.Repository
 
         public bool Login(string email, string password)=>AccountDAO.Instance.Login(email, password);
 
+        public void Register(AccountMember account)=>AccountDAO.Instance.Register(account);
     }
 }

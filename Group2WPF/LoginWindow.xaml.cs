@@ -60,7 +60,11 @@ namespace Group2WPF
             this.Close();
         }
 
-
-
+        private void RegisterTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
+            this.Close();
+        }
     }
 }

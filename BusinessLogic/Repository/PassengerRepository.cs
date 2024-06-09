@@ -16,7 +16,9 @@ namespace BusinessLogic.Repository
 
         public Passenger GetByID(int Id) => PassengerDAO.Instance.GetByID(Id);
 
-        public void insert(Passenger passenger) => PassengerDAO.Instance.Add(passenger);    
+        public void insert(Passenger passenger) => PassengerDAO.Instance.Add(passenger);
+
+        public IEnumerable<Passenger> SearchByName(string search)=>PassengerDAO.Instance.SearchByName(search);
 
         public void update(Passenger passenger) => PassengerDAO.Instance.Update(passenger);
     }

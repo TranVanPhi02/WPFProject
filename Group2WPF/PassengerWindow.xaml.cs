@@ -191,7 +191,21 @@ namespace Group2WPF
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            // Search Functionality
+            string searchText = txtSearch.Text.Trim();
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                var searchResult = passengerRepository.SearchByName(searchText);
+                DataGridPassenger.ItemsSource = searchResult;
+            }
+            else
+            {
+                LoadList();
+            }
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            (Application.Current as App)?.Logout();
         }
     }
 }

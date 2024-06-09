@@ -21,7 +21,10 @@
             <TextBlock Text="Password:" FontSize="14" Foreground="#333" Margin="0,0,0,5"/>
             <PasswordBox x:Name="txtPassword" Height="30" Padding="5" Background="#fff" BorderBrush="#ccc" BorderThickness="1" Margin="0,0,0,20"/>
 
-            <Button x:Name="btnLogin" Content="Login" Click="LoginButton_Click" Background="#007acc" Foreground="#fff" Padding="10,5" BorderBrush="#007acc" BorderThickness="1" FontSize="16" Margin="0,10,0,0" HorizontalAlignment="Center" Width="100"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btnLogin" Content="Login" Click="LoginButton_Click" Background="#007acc" Foreground="#fff" Padding="10,5" BorderBrush="#007acc" BorderThickness="1" FontSize="16" Width="100"/>
+                <TextBlock Text="Register" Foreground="#007acc" FontSize="14" VerticalAlignment="Center" Margin="10,0,0,0" Cursor="Hand" MouseLeftButtonDown="RegisterTextBlock_MouseLeftButtonDown"/>
+            </StackPanel>
 
             <TextBlock x:Name="txtErrorMessage" Text="" Foreground="Red" FontSize="12" HorizontalAlignment="Center" Margin="0,10,0,0"/>
         </StackPanel>

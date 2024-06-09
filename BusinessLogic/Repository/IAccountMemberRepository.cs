@@ -12,5 +12,6 @@ namespace BusinessLogic.Repository
         Boolean Login(string email, string password);
         string GetUserRole(string userRole);
         AccountMember GetAccountByEmail(string email);
+        void Register(AccountMember account);
     }
 }

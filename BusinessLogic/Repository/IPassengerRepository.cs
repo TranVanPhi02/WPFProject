@@ -14,5 +14,6 @@ namespace BusinessLogic.Repository
         void insert(Passenger passenger);
         void update(Passenger passenger);
         void delete(Passenger passenger);
+        IEnumerable<Passenger> SearchByName(string search);
     }
 }
