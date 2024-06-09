@@ -104,7 +104,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="ID:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource FormLabelStyle}"/>
-            <TextBox x:Name="txtId" Text="{Binding SelectedItem.Id, ElementName=DataGridBaggage}" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormTextBoxStyle}"/>
+            <TextBox x:Name="txtId" Text="{Binding SelectedItem.Id, ElementName=DataGridBaggage}" Grid.Row="0" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormTextBoxStyle}"/>
 
             <Label Content="Booking ID:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource FormLabelStyle}"/>
             <TextBox x:Name="txtBookingId" Text="{Binding SelectedItem.BookingId, ElementName=DataGridBaggage}" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormTextBoxStyle}"/>

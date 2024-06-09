@@ -92,7 +92,7 @@ namespace BusinessLogic.Dao
                 Airline existingAirline = GetAirlineByID(airline.Id);
                 if (existingAirline != null)
                 {
-                    var flightManagement = new FlightManagementDBContext();
+                     var flightManagement = new FlightManagementDBContext();
                     flightManagement.Entry(existingAirline).CurrentValues.SetValues(airline);
                     flightManagement.SaveChanges();
                 }

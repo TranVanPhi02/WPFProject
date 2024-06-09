@@ -41,9 +41,7 @@ namespace DataAccess.Models
             {
                 entity.ToTable("accountMember");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(255)
@@ -82,15 +80,13 @@ namespace DataAccess.Models
             {
                 entity.ToTable("airline");
 
-                entity.HasIndex(e => e.Code, "UQ__airline__357D4CF9D4B0AF24")
+                entity.HasIndex(e => e.Code, "UQ__airline__357D4CF90086E0F8")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Name, "UQ__airline__72E12F1B01F918B4")
+                entity.HasIndex(e => e.Name, "UQ__airline__72E12F1B09F48460")
                     .IsUnique();
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Code)
                     .HasMaxLength(10)
@@ -110,12 +106,10 @@ namespace DataAccess.Models
             {
                 entity.ToTable("airport");
 
-                entity.HasIndex(e => e.Code, "UQ__airport__357D4CF90578D12C")
+                entity.HasIndex(e => e.Code, "UQ__airport__357D4CF92571B7A2")
                     .IsUnique();
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.City)
                     .HasMaxLength(50)
@@ -143,9 +137,7 @@ namespace DataAccess.Models
             {
                 entity.ToTable("baggage");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.BookingId).HasColumnName("booking_id");
 
@@ -156,16 +148,14 @@ namespace DataAccess.Models
                 entity.HasOne(d => d.Booking)
                     .WithMany(p => p.Baggages)
                     .HasForeignKey(d => d.BookingId)
-                    .HasConstraintName("FK__baggage__booking__4AB81AF0");
+                    .HasConstraintName("FK__baggage__booking__6383C8BA");
             });
 
             modelBuilder.Entity<Booking>(entity =>
             {
                 entity.ToTable("booking");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.BookingPlatformId).HasColumnName("booking_platform_id");
 
@@ -180,26 +170,24 @@ namespace DataAccess.Models
                 entity.HasOne(d => d.BookingPlatform)
                     .WithMany(p => p.Bookings)
                     .HasForeignKey(d => d.BookingPlatformId)
-                    .HasConstraintName("FK__booking__booking__47DBAE45");
+                    .HasConstraintName("FK__booking__booking__60A75C0F");
 
                 entity.HasOne(d => d.Flight)
                     .WithMany(p => p.Bookings)
                     .HasForeignKey(d => d.FlightId)
-                    .HasConstraintName("FK__booking__flight___46E78A0C");
+                    .HasConstraintName("FK__booking__flight___5FB337D6");
 
                 entity.HasOne(d => d.Passenger)
                     .WithMany(p => p.Bookings)
                     .HasForeignKey(d => d.PassengerId)
-                    .HasConstraintName("FK__booking__passeng__45F365D3");
+                    .HasConstraintName("FK__booking__passeng__5EBF139D");
             });
 
             modelBuilder.Entity<BookingPlatform>(entity =>
             {
                 entity.ToTable("bookingPlatform");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(100)
@@ -214,9 +202,7 @@ namespace DataAccess.Models
             {
                 entity.ToTable("flight");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AirlineId).HasColumnName("airline_id");
 
@@ -245,26 +231,24 @@ namespace DataAccess.Models
                 entity.HasOne(d => d.Airline)
                     .WithMany(p => p.Flights)
                     .HasForeignKey(d => d.AirlineId)
-                    .HasConstraintName("FK__flight__airline___3D5E1FD2");
+                    .HasConstraintName("FK__flight__airline___5629CD9C");
 
                 entity.HasOne(d => d.ArrivingAirportNavigation)
                     .WithMany(p => p.FlightArrivingAirportNavigations)
                     .HasForeignKey(d => d.ArrivingAirport)
-                    .HasConstraintName("FK__flight__arriving__3F466844");
+                    .HasConstraintName("FK__flight__arriving__5812160E");
 
                 entity.HasOne(d => d.DepartingAirportNavigation)
                     .WithMany(p => p.FlightDepartingAirportNavigations)
                     .HasForeignKey(d => d.DepartingAirport)
-                    .HasConstraintName("FK__flight__departin__3E52440B");
+                    .HasConstraintName("FK__flight__departin__571DF1D5");
             });
 
             modelBuilder.Entity<Passenger>(entity =>
             {
                 entity.ToTable("passenger");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Country)
                     .HasMaxLength(50)

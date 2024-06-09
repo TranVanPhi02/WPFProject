@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Group2WPF"
         mc:Ignorable="d"
-        Title="FlightWindow" Height="450" Width="800"
+        Title="FlightWindow" Height="500" Width="900"
         Background="#F0F0F0">
     <Window.Resources>
         <!-- Define a button style for consistent styling -->
@@ -81,7 +81,7 @@
             <DataGrid x:Name="DataGridFlight" AutoGenerateColumns="False" Grid.Row="2" 
                       AlternatingRowBackground="LightGray" Background="White" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
                     <DataGridTextColumn Header="Airline ID" Binding="{Binding AirlineId}"/>
                     <DataGridTextColumn Header="Departing Airport" Binding="{Binding DepartingAirport}"/>
                     <DataGridTextColumn Header="Arriving Airport" Binding="{Binding ArrivingAirport}"/>
@@ -105,10 +105,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <WrapPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical">
+            <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="ID:" VerticalAlignment="Center" Style="{StaticResource FormLabelStyle}"/>
-                    <TextBox x:Name="txtId" Text="{Binding SelectedItem.Id, ElementName=DataGridFlight}" Style="{StaticResource FormTextBoxStyle}"/>
+                    <TextBox x:Name="txtId" Text="{Binding SelectedItem.Id, ElementName=DataGridFlight}" IsEnabled="False" Style="{StaticResource FormTextBoxStyle}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
@@ -145,15 +145,15 @@
                     <Label Content="Arrival Time:" VerticalAlignment="Center" Style="{StaticResource FormLabelStyle}"/>
                     <TextBox x:Name="txtArrivalTime" Text="{Binding SelectedItem.ArrivalTime, ElementName=DataGridFlight}" Style="{StaticResource FormTextBoxStyle}"/>
                 </StackPanel>
-            </WrapPanel>
+            </StackPanel>
 
-            <WrapPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="5">
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5">
                 <Button Content="Add" Click="AddButton_Click" Style="{StaticResource NavButtonStyle}" Width="60" Margin="0 5 5 0"/>
                 <Button Content="Edit" Click="EditButton_Click" Style="{StaticResource NavButtonStyle}" Width="60" Margin="0 5 5 0"/>
                 <Button Content="Delete" Click="DeleteButton_Click" Style="{StaticResource NavButtonStyle}" Width="60" Margin="0 5 5 0"/>
                 <Button Content="Clear" Click="ClearButton_Click" Style="{StaticResource NavButtonStyle}" Width="60" Margin="0 5 5 0"/>
-            </WrapPanel>
-        </Grid>
+            </StackPanel>
 
+        </Grid>
     </Grid>
 </Window>

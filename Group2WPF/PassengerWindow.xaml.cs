@@ -59,6 +59,7 @@ namespace Group2WPF
         private Passenger GetObject()
         {
             Passenger passenger = null;
+
             try
             {
                 passenger = new Passenger
