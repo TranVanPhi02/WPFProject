@@ -15,5 +15,7 @@ namespace BusinessLogic.Repository
         void update(Baggage baggage);
         void delete(Baggage baggage);
         IEnumerable<Baggage> SearchByWeight(decimal weight);
+        int GetTotalCount();
+        IEnumerable<Baggage> GetPaged(int pageNumber, int pageSize);
     }
 }

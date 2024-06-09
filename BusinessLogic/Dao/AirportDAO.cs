@@ -172,5 +172,44 @@ namespace BusinessLogic.Dao
             }
             return airports;
         }
+        public int GetTotalCount()
+        {
+            try
+            {
+                using (var flightManagement = new FlightManagementDBContext())
+                {
+                    return flightManagement.Airports.Count(); // Đếm tổng số bản ghi
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting total count of airports: {ex.Message}");
+            }
+        }
+
+        public IEnumerable<Airport> GetPaged(int pageNumber, int pageSize)
+        {
+            try
+            {
+                using (var flightManagement = new FlightManagementDBContext())
+                {
+                    // Tính toán vị trí bắt đầu của trang hiện tại trong tập dữ liệu
+                    int startIndex = (pageNumber - 1) * pageSize;
+
+                    // Lấy dữ liệu cho trang hiện tại, với số lượng bản ghi là pageSize, bắt đầu từ vị trí startIndex
+                    var airports = flightManagement.Airports
+                        .OrderBy(p => p.Id) // Sắp xếp theo Id hoặc trường nào đó để đảm bảo thứ tự không thay đổi
+                        .Skip(startIndex)
+                        .Take(pageSize)
+                        .ToList();
+
+                    return airports;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting paged airlines: {ex.Message}");
+            }
+        }
     }
 }

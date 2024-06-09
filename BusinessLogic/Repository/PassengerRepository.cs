@@ -16,6 +16,10 @@ namespace BusinessLogic.Repository
 
         public Passenger GetByID(int Id) => PassengerDAO.Instance.GetByID(Id);
 
+        public IEnumerable<Passenger> GetPaged(int pageNumber, int pageSize)=>PassengerDAO.Instance.GetPaged(pageNumber, pageSize);
+
+        public int GetTotalCount()=>PassengerDAO.Instance.GetTotalCount();
+
         public void insert(Passenger passenger) => PassengerDAO.Instance.Add(passenger);
 
         public IEnumerable<Passenger> SearchByName(string search)=>PassengerDAO.Instance.SearchByName(search);

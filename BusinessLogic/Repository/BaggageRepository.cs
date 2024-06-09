@@ -16,6 +16,10 @@ namespace BusinessLogic.Repository
 
         public Baggage GetByID(int Id) => BaggageDAO.Instance.GetByID(Id);
 
+        public IEnumerable<Baggage> GetPaged(int pageNumber, int pageSize)=> BaggageDAO.Instance.GetPaged(pageNumber, pageSize);
+
+        public int GetTotalCount()=> BaggageDAO.Instance.GetTotalCount();
+
         public void insert(Baggage baggage) => BaggageDAO.Instance.Add(baggage);
 
     
@@ -24,6 +28,6 @@ namespace BusinessLogic.Repository
 
         public void update(Baggage baggage) => BaggageDAO.Instance.Update(baggage);
 
-        
+    
     }
 }

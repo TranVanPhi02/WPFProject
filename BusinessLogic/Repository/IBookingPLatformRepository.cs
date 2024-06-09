@@ -14,6 +14,8 @@ namespace BusinessLogic.Repository
         void insert(BookingPlatform bookingPlatform);
         void update(BookingPlatform bookingPlatform);
         void delete(BookingPlatform bookingPlatform);
+        int GetTotalCount();
+        IEnumerable<BookingPlatform> GetPaged(int pageNumber, int pageSize);
     /*    IEnumerable<BookingPlatform> SearchByName(string search);*/
     }
 }

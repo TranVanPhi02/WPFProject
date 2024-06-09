@@ -22,5 +22,9 @@ namespace BusinessLogic.Repository
 
         public void updateAirline(Airline airline)=>AirlineDAO.Instance.Update(airline);
         public void deleteAirline(Airline airline)=>AirlineDAO.Instance.Remove(airline);
+
+        public int GetTotalCount()=> AirlineDAO.Instance.GetTotalCount();
+
+        public IEnumerable<Airline> GetPaged(int pageNumber, int pageSize) => AirlineDAO.Instance.GetPaged(pageNumber, pageSize);
     }
 }

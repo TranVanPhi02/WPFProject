@@ -16,6 +16,10 @@ namespace BusinessLogic.Repository
 
         public Flight GetByID(int Id) => FlightDAO.Instance.GetByID(Id);
 
+        public IEnumerable<Flight> GetPaged(int pageNumber, int pageSize)=> FlightDAO.Instance.GetPaged(pageNumber, pageSize);
+
+        public int GetTotalCount()=> FlightDAO.Instance.GetTotalCount();
+
         public void insert(Flight flight) => FlightDAO.Instance.Add(flight);
 
         public IEnumerable<Flight> SearchByName(string search) => FlightDAO.Instance.SearchByName(search);

@@ -23,6 +23,9 @@ namespace Group2WPF
     public partial class FlightWindow : Window
     {
         private readonly IFlightRepository flightRepository;
+        private int currentPage = 1;
+        private const int PageSize = 10;
+        private int totalRecords = 0;
         public string UserRole { get; set; }
         public FlightWindow(string role)
         {
@@ -30,7 +33,31 @@ namespace Group2WPF
             flightRepository = new FlightRepository();
             UserRole = role;
             SetupRoleBasedUI();
+   
+            UpdatePagination();
             LoadList();
+        }
+        private void UpdatePagination()
+        {
+            int totalPages = (int)Math.Ceiling((double)totalRecords / PageSize);
+            List<object> pageNumbers = new List<object>();
+
+            if (totalPages <= 3)
+            {
+                for (int i = 1; i <= totalPages; i++)
+                {
+                    pageNumbers.Add(i);
+                }
+            }
+            else
+            {
+                pageNumbers.Add(1);
+                pageNumbers.Add(2);
+                pageNumbers.Add("...");
+                pageNumbers.Add(totalPages);
+            }
+
+            PaginationItemsControl.ItemsSource = pageNumbers;
         }
         private void SetupRoleBasedUI()
         {
@@ -62,9 +89,17 @@ namespace Group2WPF
         }
         private void LoadList()
         {
-            IEnumerable<Flight> flights = flightRepository.GetAll();
+            totalRecords = flightRepository.GetTotalCount(); 
+            UpdatePagination(); 
+            UpdateDataGrid(); 
+        }
+
+        private void UpdateDataGrid()
+        {
+            IEnumerable<Flight> flights = flightRepository.GetPaged(currentPage, PageSize); 
             DataGridFlight.ItemsSource = flights;
         }
+
 
         private Flight GetObject()
         {
@@ -225,6 +260,39 @@ namespace Group2WPF
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             (Application.Current as App)?.Logout();
+        }
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                LoadList();
+                UpdatePagination();
+            }
+        }
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            int totalPages = (int)Math.Ceiling((double)totalRecords / PageSize);
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                LoadList();
+                UpdatePagination();
+            }
+        }
+    
+        private void PageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                int page = Convert.ToInt32(button.Content);
+                currentPage = page;
+                UpdateDataGrid();
+                UpdatePagination();
+            }
         }
     }
 }

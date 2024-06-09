@@ -142,6 +142,44 @@ namespace BusinessLogic.Dao
                 throw new Exception($"Error removing bookingPlatform: {ex.Message}");
             }
         }
+        public int GetTotalCount()
+        {
+            try
+            {
+                using (var flightManagement = new FlightManagementDBContext())
+                {
+                    return flightManagement.BookingPlatforms.Count(); // Đếm tổng số bản ghi
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting total count of bookingPlatforms: {ex.Message}");
+            }
+        }
 
+        public IEnumerable<BookingPlatform> GetPaged(int pageNumber, int pageSize)
+        {
+            try
+            {
+                using (var flightManagement = new FlightManagementDBContext())
+                {
+                    // Tính toán vị trí bắt đầu của trang hiện tại trong tập dữ liệu
+                    int startIndex = (pageNumber - 1) * pageSize;
+
+                    // Lấy dữ liệu cho trang hiện tại, với số lượng bản ghi là pageSize, bắt đầu từ vị trí startIndex
+                    var bookingPlatforms = flightManagement.BookingPlatforms
+                        .OrderBy(p => p.Id) // Sắp xếp theo Id hoặc trường nào đó để đảm bảo thứ tự không thay đổi
+                        .Skip(startIndex)
+                        .Take(pageSize)
+                        .ToList();
+
+                    return bookingPlatforms;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting paged bookingPlatforms: {ex.Message}");
+            }
+        }
     }
 }

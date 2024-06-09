@@ -15,6 +15,10 @@ namespace BusinessLogic.Repository
         public IEnumerable<Booking> GetAll() => BookingDAO.Instance.GetAllList();
         public Booking GetByID(int Id) => BookingDAO.Instance.GetByID(Id);
 
+        public IEnumerable<Booking> GetPaged(int pageNumber, int pageSize)=> BookingDAO.Instance.GetPaged(pageNumber, pageSize);    
+
+        public int GetTotalCount()=>BookingDAO.Instance.GetTotalCount();
+
         public void insert(Booking booking) => BookingDAO.Instance.Add(booking);
 
         public IEnumerable<Booking> SearchByTime(DateTime searchTime) => BookingDAO.Instance.SearchByTime(searchTime);

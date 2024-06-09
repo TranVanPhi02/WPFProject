@@ -11,9 +11,11 @@ namespace BusinessLogic.Repository
     {
         IEnumerable<Flight> GetAll();
         Flight GetByID(int Id);
+        int GetTotalCount();
         void insert(Flight flight);
         void update(Flight flight);
         void delete(Flight flight);
         IEnumerable<Flight> SearchByName(string search);
+        IEnumerable<Flight> GetPaged(int pageNumber, int pageSize);
     }
 }

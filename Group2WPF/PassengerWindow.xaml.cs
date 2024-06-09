@@ -4,13 +4,19 @@ using System.Windows;
 using DataAccess.Models;
 using BusinessLogic.Repository;
 using System.Data;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace Group2WPF
 {
     public partial class PassengerWindow : Window
     {
         private readonly IPassengerRepository passengerRepository;
-       
+        private int currentPage = 1;
+        private const int PageSize = 10;
+        private int totalRecords = 0;
+      
+
         public string UserRole { get; set; }
         public PassengerWindow(string role)
         {
@@ -19,14 +25,46 @@ namespace Group2WPF
             UserRole = role;
             LoadList();
             SetupRoleBasedUI();
+            UpdatePagination();
+      
         }
+  
 
         private void LoadList()
         {
-            IEnumerable<Passenger> passengers = passengerRepository.GetAll();
+            IEnumerable<Passenger> passengers = passengerRepository.GetPaged(currentPage, PageSize);
+            totalRecords = passengerRepository.GetTotalCount();
             DataGridPassenger.ItemsSource = passengers;
         }
+        private void UpdatePagination()
+        {
+            int totalPages = (int)Math.Ceiling((double)totalRecords / PageSize);
+            List<object> pageNumbers = new List<object>();
 
+            if (totalPages <= 3)
+            {
+                for (int i = 1; i <= totalPages; i++)
+                {
+                    pageNumbers.Add(i);
+                }
+            }
+            else
+            {
+                pageNumbers.Add(1);
+                pageNumbers.Add(2);
+                pageNumbers.Add("...");
+                pageNumbers.Add(totalPages);
+            }
+
+            PaginationItemsControl.ItemsSource = pageNumbers;
+        }
+
+
+        private void UpdateDataGrid()
+        {
+            IEnumerable<Passenger> passengers = passengerRepository.GetPaged(currentPage, PageSize);
+            DataGridPassenger.ItemsSource = passengers;
+        }
         private void SetupRoleBasedUI()
         {
             btnOpenAirlineWindow.Visibility = Visibility.Collapsed;
@@ -199,6 +237,7 @@ namespace Group2WPF
             }
             else
             {
+                currentPage = 1;
                 LoadList();
             }
         }
@@ -207,5 +246,38 @@ namespace Group2WPF
         {
             (Application.Current as App)?.Logout();
         }
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                LoadList();
+                UpdatePagination();
+            }
+        }
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            int totalPages = (int)Math.Ceiling((double)totalRecords / PageSize);
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                LoadList();
+                UpdatePagination();
+            }
+        }
+        private void PageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                int page = Convert.ToInt32(button.Content);
+                currentPage = page;
+                UpdateDataGrid();
+                UpdatePagination();
+            }
+        }
+
     }
 }

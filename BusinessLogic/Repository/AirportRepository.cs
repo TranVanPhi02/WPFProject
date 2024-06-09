@@ -16,6 +16,10 @@ namespace BusinessLogic.Repository
 
         public Airport GetByID(int Id) => AirportDAO.Instance.GetByID(Id);
 
+        public IEnumerable<Airport> GetPaged(int pageNumber, int pageSize)=> AirportDAO.Instance.GetPaged(pageNumber, pageSize);
+
+        public int GetTotalCount()=> AirportDAO.Instance.GetTotalCount();   
+
         public void insert(Airport airport) => AirportDAO.Instance.Add(airport);
 
         public IEnumerable<Airport> SearchByName(string search) => AirportDAO.Instance.SearchByName(search);

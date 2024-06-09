@@ -151,5 +151,38 @@ namespace BusinessLogic.Dao
             }
             return passengers;
         }
+        public IEnumerable<Passenger> GetPaged(int pageNumber, int pageSize)
+        {
+            try
+            {
+                using (var flightManagement = new FlightManagementDBContext())
+                {
+                    // Tính toán vị trí bắt đầu của trang hiện tại trong tập dữ liệu
+                    int startIndex = (pageNumber - 1) * pageSize;
+
+                    // Lấy dữ liệu cho trang hiện tại, với số lượng bản ghi là pageSize, bắt đầu từ vị trí startIndex
+                    var passengers = flightManagement.Passengers
+                        .OrderBy(p => p.Id) // Sắp xếp theo Id hoặc trường nào đó để đảm bảo thứ tự không thay đổi
+                        .Skip(startIndex)
+                        .Take(pageSize)
+                        .ToList();
+
+                    return passengers;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting paged passengers: {ex.Message}");
+            }
+        }
+        public int GetTotalCount()
+        {
+            using (var flightManagement = new FlightManagementDBContext())
+            {
+                
+
+                return flightManagement.Passengers.Count();
+            }
+        }
     }
 }

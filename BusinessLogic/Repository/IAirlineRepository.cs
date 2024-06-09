@@ -14,6 +14,8 @@ namespace BusinessLogic.Repository
         void insertAirline(Airline airline);
         void updateAirline(Airline airline);
         void deleteAirline(Airline airline);
+        int GetTotalCount();
         IEnumerable<Airline> SearchByName(string search);
+        IEnumerable<Airline> GetPaged(int pageNumber, int pageSize);
     }
 }

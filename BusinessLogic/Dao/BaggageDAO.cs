@@ -154,6 +154,44 @@ namespace BusinessLogic.Dao
             }
             return baggages;
         }
+        public int GetTotalCount()
+        {
+            try
+            {
+                using (var flightManagement = new FlightManagementDBContext())
+                {
+                    return flightManagement.Baggages.Count(); // Đếm tổng số bản ghi
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting total count of baggages: {ex.Message}");
+            }
+        }
 
+        public IEnumerable<Baggage> GetPaged(int pageNumber, int pageSize)
+        {
+            try
+            {
+                using (var flightManagement = new FlightManagementDBContext())
+                {
+                    // Tính toán vị trí bắt đầu của trang hiện tại trong tập dữ liệu
+                    int startIndex = (pageNumber - 1) * pageSize;
+
+                    // Lấy dữ liệu cho trang hiện tại, với số lượng bản ghi là pageSize, bắt đầu từ vị trí startIndex
+                    var baggages = flightManagement.Baggages
+                        .OrderBy(p => p.Id) // Sắp xếp theo Id hoặc trường nào đó để đảm bảo thứ tự không thay đổi
+                        .Skip(startIndex)
+                        .Take(pageSize)
+                        .ToList();
+
+                    return baggages;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting paged baggages: {ex.Message}");
+            }
+        }
     }
 }

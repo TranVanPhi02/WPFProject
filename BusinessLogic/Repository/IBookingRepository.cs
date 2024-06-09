@@ -15,5 +15,7 @@ namespace BusinessLogic.Repository
         void update(Booking booking);
         void delete(Booking booking);
         IEnumerable<Booking> SearchByTime(DateTime searchTime);
+        int GetTotalCount();
+        IEnumerable<Booking> GetPaged(int pageNumber, int pageSize);
     }
 }
