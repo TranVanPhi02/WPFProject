@@ -1,4 +1,5 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.DTO;
+using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -190,6 +191,30 @@ namespace BusinessLogic.Dao
                 throw new Exception($"Error getting paged flights: {ex.Message}");
             }
         }
+        public IEnumerable<FlightStatistics> GetStatistics()
+        {
+            try
+            {
+                using (var flightManagement = new FlightManagementDBContext())
+                {
+                    var monthlyStatistics = flightManagement.Flights
+                        .GroupBy(f => new { f.DepartureTime.Value.Year, f.DepartureTime.Value.Month })
+                        .Select(g => new FlightStatistics
+                        {
+                            Year = g.Key.Year,
+                            Month = g.Key.Month,
+                            FlightCount = g.Count()
+                        })
+                        .OrderBy(s => s.Year).ThenBy(s => s.Month)
+                        .ToList();
 
+                    return monthlyStatistics;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting flight statistics: {ex.Message}");
+            }
+        }
     }
 }

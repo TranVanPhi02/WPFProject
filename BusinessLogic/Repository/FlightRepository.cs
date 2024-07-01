@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.DTO;
 
 namespace BusinessLogic.Repository
 {
@@ -16,8 +17,11 @@ namespace BusinessLogic.Repository
 
         public Flight GetByID(int Id) => FlightDAO.Instance.GetByID(Id);
 
+   
+
         public IEnumerable<Flight> GetPaged(int pageNumber, int pageSize)=> FlightDAO.Instance.GetPaged(pageNumber, pageSize);
 
+        public IEnumerable<FlightStatistics> GetStatistics() => FlightDAO.Instance.GetStatistics();
         public int GetTotalCount()=> FlightDAO.Instance.GetTotalCount();
 
         public void insert(Flight flight) => FlightDAO.Instance.Add(flight);

@@ -294,5 +294,27 @@ namespace Group2WPF
                 UpdatePagination();
             }
         }
+
+        private void StatisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var statistics = flightRepository.GetStatistics();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Year\tMonth\tFlight Count");
+
+                foreach (var stat in statistics)
+                {
+                    sb.AppendLine($"{stat.Year}\t{stat.Month}\t{stat.FlightCount}");
+                }
+
+                MessageBox.Show(sb.ToString(), "Flight Statistics");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+    
     }
 }

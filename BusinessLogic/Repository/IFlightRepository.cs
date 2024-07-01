@@ -1,4 +1,5 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.DTO;
+using DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,6 @@ namespace BusinessLogic.Repository
         void delete(Flight flight);
         IEnumerable<Flight> SearchByName(string search);
         IEnumerable<Flight> GetPaged(int pageNumber, int pageSize);
+        IEnumerable<FlightStatistics> GetStatistics();
     }
 }
